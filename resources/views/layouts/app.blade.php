@@ -44,16 +44,16 @@
                     @guest
                     {{-- if Not logged in, nothing to see which makes sense :thumbsup: --}}
                     @else
-                        @if(!Auth::user()->study_groups->isEmpty())
+                        @if(!Auth::user()->studygroups->isEmpty())
                             <ul class="navbar-nav ms-left">
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         Study Groups
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
-                                        @foreach(Auth::user()->study_groups as $study_group)
-                                            <a class="dropdown-item" >
-                                                {{$study_group->name}}
+                                        @foreach(Auth::user()->studygroups as $studygroup)
+                                            <a href="" class="dropdown-item" >
+                                                {{$studygroup->name}}
                                             </a>
                                         @endforeach
                                         {{-- THIS IS HOW I CAN LINK MY GROUPS TO THEIR PAGE 'SEE BELOW -LOGOUT FORM-' --}}
@@ -64,7 +64,12 @@
                                 </li>
                             </ul>
                         @else
-                            Create a group!
+                            <ul class="navbar-nav ms-left">
+                                <li class="nav-item">
+                                    <a href="#">Create a Group</a>
+                                </li>
+                            </ul>
+                            
                         @endif
                     @endguest
                     

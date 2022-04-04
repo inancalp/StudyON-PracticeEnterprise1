@@ -34,11 +34,11 @@ Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("u
 // Route::get("/home", [ProfileController::class, "profile_user"])->name("user.profile");
 
 
-Route::get("/question/{user}", [QuestionController::class, "question_create"])->name("questions.show");
-Route::get("/question/create", [QuestionController::class, "question_create"])->name("question.create");
-
-Route::get("/studygroup/create", function(){return view("studygroup.create");});
-Route::post("/studygroup/home", [StudyGroupController::class, "create_group"])->name("studygroup.home");
+// Route::get("/question/{user}", [QuestionController::class, "question_create"])->name("questions.show");
+// Route::get("/question/create", [QuestionController::class, "question_create"])->name("question.create");
 
 
-Route::get("/studygroup/index", function(){return view("studygroup.index");})->name("studygroup.index");
+Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
+Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
+
+Route::get("/studygroup/{studygroup_id}", [StudyGroupController::class, "show"])->name("studygroup.show");

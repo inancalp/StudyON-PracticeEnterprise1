@@ -11,7 +11,6 @@
                 <div class="card-body">
                     <p><b>Profile Picture</b></p>
                     <img style="width:100px; border-radius:50%;"src="/png/logo2.png" alt="">
-                    
                     <hr>
                 </div>
                 <div class="card-body">
@@ -31,7 +30,7 @@
                 </div>
                 <div class="card-body">
                     <p><b>Description</b></p>
-                    {{ Auth::user()->profile->description}}
+                    {{ Auth::user()->profile->description ?? "N/A"}}
                     <form action="#" method='POST'>
                         @csrf
                         <label>Change Description</label><br>

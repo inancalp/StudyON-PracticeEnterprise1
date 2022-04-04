@@ -12,7 +12,7 @@
                 <div class="card-body">
                     
                     {{-- FORM ACTION SHOULD ALSO ASSIGN 'user_id' 'is_admin' --}}
-                    <form action="#" method="POST"> 
+                    <form action="/studygroup" method="POST"> 
                         @csrf
                         <div class="card">
                             <label>Name:</label>

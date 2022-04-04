@@ -46,7 +46,7 @@ class User extends Authenticatable
 
 
     
-    public function study_groups(){
+    public function studygroups(){
 
         return $this->hasMany(StudyGroup::class);
 
