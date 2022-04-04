@@ -42,4 +42,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    
+    public function study_groups(){
+
+        return $this->hasMany(StudyGroup::class);
+
+
+    }
+
+
+    function profile(){
+        return $this -> hasOne(Profile::class);
+    }
+
+    
 }

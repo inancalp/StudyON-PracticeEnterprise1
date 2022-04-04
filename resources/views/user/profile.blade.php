@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><b>Profile</b></div>
+                <div class="card-header"><b>Profile with Auth::user() Command</b></div>
 
                 <div class="card-body">
                     <p><b>Profile Picture</b></p>
@@ -16,22 +16,27 @@
                 </div>
                 <div class="card-body">
                     <p><b>userName</b></p>
-                    {{ $user_->username }}
+                    {{ Auth::user()->username }}
                     <hr>
                 </div>
                 <div class="card-body">
                     <p><b>nameSirname</b></p>
-                    {{$user_->name}}
+                    {{ Auth::user()->name }}
                     <hr>
                 </div>
                 <div class="card-body">
                     <p><b>eMail</b></p>
-                    {{$user_->email}}
+                    {{ Auth::user()->email }}
                     <hr>
                 </div>
                 <div class="card-body">
                     <p><b>Description</b></p>
-                    <textarea></textarea>
+                    {{ Auth::user()->profile->description}}
+                    <form action="#" method='POST'>
+                        @csrf
+                        <label>Change Description</label><br>
+                        <textarea style="width:300px; height:50px; margin-top:2px;" name="description"></textarea>
+                    </form>
                     <hr>
                 </div>
                 <div class="card-body">

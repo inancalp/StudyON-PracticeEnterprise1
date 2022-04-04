@@ -19,6 +19,14 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
+<style>
+    .card {
+        padding:5px;
+        margin-top:5px;
+        margin-bottom: 5px;
+        border:1px solid black;
+    }
+</style>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -33,10 +41,33 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
+                    @guest
+                    {{-- if Not logged in, nothing to see which makes sense :thumbsup: --}}
+                    @else
+                        @if(!Auth::user()->study_groups->isEmpty())
+                            <ul class="navbar-nav ms-left">
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        Study Groups
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
+                                        @foreach(Auth::user()->study_groups as $study_group)
+                                            <a class="dropdown-item" >
+                                                {{$study_group->name}}
+                                            </a>
+                                        @endforeach
+                                        {{-- THIS IS HOW I CAN LINK MY GROUPS TO THEIR PAGE 'SEE BELOW -LOGOUT FORM-' --}}
+                                        {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form> --}}
+                                    </div>
+                                </li>
+                            </ul>
+                        @else
+                            Create a group!
+                        @endif
+                    @endguest
+                    
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -51,8 +82,15 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
-                            @endif
+                        @endif
                         @else
+                        <li class="nav-item">
+                            {{-- HOME ILE PROFILE ARASINDA PROBLEM YASADIM --}}
+                            <a class="nav-link" href="#">Notifications</a> 
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('user.profile')}}">{{ __('Profile') }}</a> 
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->username }}

@@ -10,7 +10,13 @@ class Profile extends Model
 {
     use HasFactory;
 
-    function profile_user(){
+
+    protected $table = "profiles";
+    protected $fillable = ["user_id","description"];
+
+
+    function user(){
         return $this->belongsTo(User::class);
     }
+    
 }
