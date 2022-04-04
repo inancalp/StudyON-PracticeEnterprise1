@@ -52,10 +52,11 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
                                         @foreach(Auth::user()->studygroups as $studygroup)
-                                            <a href="" class="dropdown-item" >
-                                                {{$studygroup->name}}
+                                            <a href="/studygroup/{{$studygroup->id}}" class="dropdown-item" >
+                                                "{{$studygroup->name}}"
                                             </a>
                                         @endforeach
+                                        <a href="/studygroup/create" class="dropdown-item">Create a Group</a>
                                         {{-- THIS IS HOW I CAN LINK MY GROUPS TO THEIR PAGE 'SEE BELOW -LOGOUT FORM-' --}}
                                         {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -66,7 +67,7 @@
                         @else
                             <ul class="navbar-nav ms-left">
                                 <li class="nav-item">
-                                    <a href="#">Create a Group</a>
+                                    <a href="/studygroup/create" class="nav-link"><b>Create a Group</b></a>
                                 </li>
                             </ul>
                             

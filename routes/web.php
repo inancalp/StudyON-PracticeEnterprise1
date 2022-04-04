@@ -41,4 +41,4 @@ Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("u
 Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
 
-Route::get("/studygroup/{studygroup_id}", [StudyGroupController::class, "show"])->name("studygroup.show");
+Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])->name("studygroup.show");

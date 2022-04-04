@@ -24,12 +24,13 @@ class StudyGroupController extends Controller
         auth()->user()->studygroups()->create($data); //ADD NOTE
 
         // StudyGroup::create($data);
-        dd(request()->all());
+        // dd(request()->all());
         return view("home");      
     }
 
-    function show($studygroup_id){
-        // dd($studygroup_id);
-        return view("studygroup.show", compact("name", "description") ?? "Group does not exist");
+    function show(StudyGroup $studygroup){
+        // dd($studygroup);
+        return view("studygroup.show", compact("studygroup"));
+        // return view("studygroup.show", compact("name", "description"));
     }
 }
