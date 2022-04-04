@@ -8,6 +8,11 @@ use \App\Models\User;
 
 class StudyGroupController extends Controller
 {   
+    function index(){
+        $studygroups = StudyGroup::all();
+        return view("studygroup.index", compact("studygroups"));
+    }
+
     function create(){
         return view("studygroup.create");
     }
@@ -19,10 +24,8 @@ class StudyGroupController extends Controller
             "password" => "required|min:3",
             "description" => "",
         ]);
-
         // with this way i am able to fetch the user_id to the study group automatically
         auth()->user()->studygroups()->create($data); //ADD NOTE
-
         // StudyGroup::create($data);
         // dd(request()->all());
         return view("home");      
