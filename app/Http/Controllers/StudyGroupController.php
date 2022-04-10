@@ -13,6 +13,11 @@ class StudyGroupController extends Controller
         return view("studygroup.index", compact("studygroups"));
     }
 
+    function welcome(){
+        $studygroups = StudyGroup::all();
+        return view("welcome", compact("studygroups"));
+    }
+
     function create(){
         return view("studygroup.create");
     }

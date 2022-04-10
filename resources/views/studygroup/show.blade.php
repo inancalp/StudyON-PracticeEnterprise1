@@ -11,7 +11,10 @@
                     <p>Description <b>{{$studygroup->description}}</b></p>
                 </div>
                 <div class="card-body">
-                    <p>Classes -DropDown List- ?? <b>FEATURE</b></p>
+                    <p>Courses -DropDown List- ?? <b>FEATURE</b></p>
+                </div>
+                <div class="card-body">
+                    <join-button studygroup-id="{{ $studygroup->id }}"></join-button>
                 </div>
             </div>
             

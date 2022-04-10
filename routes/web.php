@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [StudyGroupController::class, "welcome"]);
 
 Auth::routes();
 
@@ -37,6 +36,8 @@ Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("u
 // Route::get("/question/{user}", [QuestionController::class, "question_create"])->name("questions.show");
 // Route::get("/question/create", [QuestionController::class, "question_create"])->name("question.create");
 
+
+Route::post("/studygroup/join/{studygroup}", [StudyGroupJoinController::class, "store"])->name("studygroup.join");
 
 Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
