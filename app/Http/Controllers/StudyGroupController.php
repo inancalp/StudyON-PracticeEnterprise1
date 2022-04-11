@@ -40,15 +40,29 @@ class StudyGroupController extends Controller
 
     public function show(StudyGroup $studygroup){
         // dd($studygroup);
-        return view("studygroup.show", compact("studygroup"));
+        return view("studygroup.show2", compact("studygroup"));
         // return view("studygroup.show", compact("name", "description"));
     }
 
 
-    public function join(StudyGroup $studygroup){
-        
-        return auth()->user()->member_of()->toggle($studygroup);
+    public function join(Request $request){
 
+        $password = $request->password; //password input of user.
+        $studygroup = $request->hidden;
+        
+        if($password == Studygroup::find($studygroup)->password){
+
+            auth()->user()->member_of()->toggle($studygroup);
+
+            $studygroups = StudyGroup::all();
+            return view("studygroup.index", compact("studygroups"));
+
+        }
+        else{
+            return "WRONG PASSWORD!";
+        }
+        
+        
     }
 
 }

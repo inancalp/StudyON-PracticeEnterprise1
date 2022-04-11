@@ -19,7 +19,13 @@
                     </div>
                 @else
                     <div class="card-body">
-                        <join-button studygroup-id="{{ $studygroup->id }}"></join-button>
+                        <form action="{{route('studygroup.join')}}" method="POST">
+                            @csrf
+                            <input type="hidden"  name="hidden" value="{{$studygroup->id}}">
+                            <label for="password">Password-></label>
+                            <input type="password" name="password">
+                            <button>Join Group</button> 
+                        </form>
                     </div>
                 @endif
                 

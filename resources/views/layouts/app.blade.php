@@ -44,7 +44,7 @@
                     @guest
                     {{-- if Not logged in, nothing to see which makes sense :thumbsup: --}}
                     @else
-                        @if(!Auth::user()->studygroups->isEmpty())
+                        @if(!Auth::user()->member_of->isEmpty())
                             <ul class="navbar-nav ms-left">
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
