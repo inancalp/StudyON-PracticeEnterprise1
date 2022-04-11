@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="btn btn-primary" @click="joinStudyGroup">Join the Group</button> 
+        <button class="btn btn-primary" @click="joinStudyGroup">Join Group</button> 
     </div>
 </template>
 
@@ -13,11 +13,19 @@
             console.log('Component mounted.')
         },
 
+        // data: function(){
+        //     return {
+        //         status:
+        //     }
+        // }
+         
+        
+
         methods : {
             joinStudyGroup(){
                 axios.post('/studygroup/join/' + this.studygroupId)
                         .then(response => {
-                            alert(response.data);
+                            console.log(response.data);
                             });
 
             }

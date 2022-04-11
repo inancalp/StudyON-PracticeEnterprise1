@@ -51,7 +51,7 @@
                                         Study Groups
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
-                                        @foreach(Auth::user()->studygroups as $studygroup)
+                                        @foreach(Auth::user()->member_of as $studygroup)
                                             <a href="/studygroup/{{$studygroup->id}}" class="dropdown-item" >
                                                 "{{$studygroup->name}}"
                                             </a>

@@ -8,21 +8,21 @@ use \App\Models\User;
 
 class StudyGroupController extends Controller
 {   
-    function index(){
+    public function index(){
         $studygroups = StudyGroup::all();
         return view("studygroup.index", compact("studygroups"));
     }
 
-    function welcome(){
+    public function welcome(){
         $studygroups = StudyGroup::all();
         return view("welcome", compact("studygroups"));
     }
 
-    function create(){
+    public function create(){
         return view("studygroup.create");
     }
 
-    function store(){
+    public function store(){
 
         $data = request()->validate([
             "name" => "required|min:3",
@@ -30,15 +30,25 @@ class StudyGroupController extends Controller
             "description" => "",
         ]);
         // with this way i am able to fetch the user_id to the study group automatically
-        auth()->user()->studygroups()->create($data); //ADD NOTE
+        auth()->user()->studygroups()->create($data);
+        auth()->user()->member_of()->toggle(Studygroup::latest()->first()->id); //HERE I PUT THE USER DIRECTLY AS A MEMBER IN THE STUDY GROUP
+        //ADD NOTE
         // StudyGroup::create($data);
         // dd(request()->all());
         return view("home");      
     }
 
-    function show(StudyGroup $studygroup){
+    public function show(StudyGroup $studygroup){
         // dd($studygroup);
         return view("studygroup.show", compact("studygroup"));
         // return view("studygroup.show", compact("name", "description"));
     }
+
+
+    public function join(StudyGroup $studygroup){
+        
+        return auth()->user()->member_of()->toggle($studygroup);
+
+    }
+
 }

@@ -46,18 +46,18 @@ class User extends Authenticatable
 
 
 
-    
+    // 
     public function studygroups(){
-
         return $this->hasMany(StudyGroup::class);
-
-
     }
 
 
-    function profile(){
+    public function profile(){
         return $this -> hasOne(Profile::class);
     }
 
+    public function member_of(){
+        return $this->belongsToMany(StudyGroup::class);
+    }
     
 }

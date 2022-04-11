@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::get("/profile/{user}", [ProfileController::class, "profile"])->name("profile-show");
  
 Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("user.profile");
-
+Route::get("/user/profile/{user}", [ProfileController::class, "show"])->name("profile.show");
 // Route::get("/home", [ProfileController::class, "profile_user"])->name("user.profile");
 
 
@@ -37,7 +37,7 @@ Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("u
 // Route::get("/question/create", [QuestionController::class, "question_create"])->name("question.create");
 
 
-Route::post("/studygroup/join/{studygroup}", [StudyGroupJoinController::class, "store"])->name("studygroup.join");
+Route::post("/studygroup/join/{studygroup}", [StudyGroupController::class, "join"])->name("studygroup.join");
 
 Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");

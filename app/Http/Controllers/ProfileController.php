@@ -12,15 +12,17 @@ use \App\Models\User; // DO NOT EVER FORGET :)
 class ProfileController extends Controller
 {
 
-    // public function profile($user){
-    //     $user = User::findOrFail($user);
-
-    //     // dd($user);
-    //     return view("profile", [
-    //         'user' => $user,
-    //     ]);
-
+    // //  function show(StudyGroup $studygroup){
+    //     // dd($studygroup);
+    //     return view("studygroup.show", compact("studygroup"));
+    //     // return view("studygroup.show", compact("name", "description"));
     // }
+
+    public function show(User $user){
+        // dd($user);
+        return view("profile.show", compact("user"));
+
+    }
 
     public function profile_user(){
         

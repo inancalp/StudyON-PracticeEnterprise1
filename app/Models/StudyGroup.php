@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 
-class StudyGroup extends Model
+class Studygroup extends Model
 {
     use HasFactory;
     // copied from user
@@ -16,11 +16,13 @@ class StudyGroup extends Model
         'name',
         'password',
         'description',
-        "created_at",
-        "updated_at",
     ];
 
     public function user(){
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class); //NO! manyTomany relationship
+    }
+
+    function members(){
+        return $this->belongsToMany(User::class);
     }
 }
