@@ -40,7 +40,7 @@ class StudyGroupController extends Controller
 
     public function show(StudyGroup $studygroup){
         // dd($studygroup);
-        return view("studygroup.show2", compact("studygroup"));
+        return view("studygroup.show", compact("studygroup"));
         // return view("studygroup.show", compact("name", "description"));
     }
 

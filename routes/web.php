@@ -5,6 +5,7 @@ use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,3 +46,7 @@ Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
 Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])->name("studygroup.show");
 Route::get("/studygroup", [StudyGroupController::class, "index"])->name("studygroup.index");
+
+
+Route::get("studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
+Route::post("studygroup/course", [CourseController::class, "store"])->name("course.store");
