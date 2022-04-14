@@ -12,6 +12,7 @@ class CourseController extends Controller
         return view("course.create", compact("studygroup"));
     }
 
+
     public function store(Request $request){
 
             // dd(request()->all());
@@ -31,4 +32,9 @@ class CourseController extends Controller
         dd($data);
         
     }
+
+    public function show(Course $course){
+        return view("course.show", compact("course"));
+    }
+
 }

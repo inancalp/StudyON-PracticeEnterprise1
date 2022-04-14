@@ -17,10 +17,9 @@
                         <div class="card">
                             <label>Title: </label>
                             {{-- GOOD PRACTICE OF ERROR TO INFORM USER --}}
-
+                            <input type="text" name="title" class="form-control{{$errors->has("title") ? " is-invalid" : ""}}">
                             <input type="hidden"  name="hidden" value="{{$studygroup->id}}">
-                            <input type="text" name="title"
-                            class="form-control{{$errors->has("title") ? " is-invalid" : ""}}">
+                            
 
                             @if ($errors->has("title"))
                                 <span class="invalid-feedback" role="alert">

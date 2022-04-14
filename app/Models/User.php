@@ -47,10 +47,16 @@ class User extends Authenticatable
 
 
 
-    // 
+    
     public function studygroups(){
         return $this->hasMany(StudyGroup::class);
     }
+
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
+
 
 
     public function profile(){
@@ -61,7 +67,7 @@ class User extends Authenticatable
         return $this->belongsToMany(StudyGroup::class);
     }
 
- 
+   
 
     
     

@@ -49,4 +49,8 @@ Route::get("/studygroup", [StudyGroupController::class, "index"])->name("studygr
 
 
 Route::get("studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
-Route::post("studygroup/course", [CourseController::class, "store"])->name("course.store");
+Route::post("studygroup/course", [CourseController::class, "store"])->name("course.store"); //dd
+
+
+Route::get("/studygroup/{studygroup}/course/{course}/create", [QuestionController::class, "create"])->name("question.create");
+Route::post("studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd

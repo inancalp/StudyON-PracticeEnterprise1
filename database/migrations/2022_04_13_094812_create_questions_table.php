@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("course_id");
+            $table->unsignedBigInteger("user_id");
+            $table->bigInteger("course_id")->nullable();
             $table->string("question")->nullable();
-            $table->string("answer1")->nullable();
-            $table->string("answer2")->nullable();
-            $table->string("answer3")->nullable();
-            $table->string("answer4")->nullable();
-            $table->string("correctanswer")->nullable();
+            $table->string("answer_a")->nullable();
+            $table->string("answer_b")->nullable();
+            $table->string("answer_c")->nullable();
+            $table->string("answer_d")->nullable();
+            $table->string("correct_answer")->nullable();
             $table->timestamps();
-            $table->index("course_id");
+            $table->index("user_id");
         });
     }
 
