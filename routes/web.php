@@ -25,32 +25,24 @@ Auth::routes();
 // TRY NOT TO TOUCH THE HOME ROUTE
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
-// Route::get("/profile/{user}", [ProfileController::class, "profile"])->name("profile.show");
-// Route::get("/profile/{user}", [ProfileController::class, "profile"])->name("profile-show");
  
 Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("user.profile");
 Route::get("/user/profile/{user}", [ProfileController::class, "show"])->name("profile.show");
-// Route::get("/home", [ProfileController::class, "profile_user"])->name("user.profile");
-
-
-// Route::get("/question/{user}", [QuestionController::class, "question_create"])->name("questions.show");
-// Route::get("/question/create", [QuestionController::class, "question_create"])->name("question.create");
-
-
-// --------------
-Route::post("/studygroup/join-successfull", [StudyGroupController::class, "join"])->name("studygroup.join");
-// --------------
 
 Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
 Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])->name("studygroup.show");
 Route::get("/studygroup", [StudyGroupController::class, "index"])->name("studygroup.index");
+Route::post("/studygroup/join-successfull", [StudyGroupController::class, "join"])->name("studygroup.join");
 
 
-Route::get("studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
-Route::post("studygroup/course", [CourseController::class, "store"])->name("course.store"); //dd
+Route::get("/studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
+Route::post("/studygroup/course", [CourseController::class, "store"])->name("course.store"); //dd
+
+
 
 
 Route::get("/studygroup/{studygroup}/course/{course}/create", [QuestionController::class, "create"])->name("question.create");
-Route::post("studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
+Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
+
+Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])->name("question.show");

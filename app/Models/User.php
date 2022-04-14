@@ -52,6 +52,15 @@ class User extends Authenticatable
         return $this->hasMany(StudyGroup::class);
     }
 
+    public function member_of(){
+        return $this->belongsToMany(StudyGroup::class);
+    }
+
+
+
+
+
+    
 
     public function questions(){
         return $this->hasMany(Question::class);
@@ -63,10 +72,7 @@ class User extends Authenticatable
         return $this -> hasOne(Profile::class);
     }
 
-    public function member_of(){
-        return $this->belongsToMany(StudyGroup::class);
-    }
-
+   
    
 
     

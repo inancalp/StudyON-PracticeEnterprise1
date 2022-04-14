@@ -34,4 +34,7 @@ class QuestionController extends Controller
 
     }
 
+    public function show(Studygroup $studygroup, Course $course){
+        return view("question.show", compact("studygroup", "course"));
+    }
 }

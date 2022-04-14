@@ -35,7 +35,9 @@
                                 QuizON
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="quizon-dropdown">
-                                {{-- this is where with foreach and if statements that i will put the question for the user! --}}
+                                @foreach($studygroup->courses as $course)
+                                    <li><a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/questions" class="dropdown-item">{{$course->title}}</a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>

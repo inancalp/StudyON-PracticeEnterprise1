@@ -14,9 +14,9 @@ class Course extends Model
     
     use HasFactory;
 
-    public function questions(){
-        return $this->hasMany(Question::class);
-    }
+    // public function questions(){
+    //     return $this->hasMany(Question::class);
+    // }
 
     public function studygroup(){
         return $this->belongsTo(Studygroup::class);
