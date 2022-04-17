@@ -37,4 +37,16 @@ class QuestionController extends Controller
     public function show(Studygroup $studygroup, Course $course){
         return view("question.show", compact("studygroup", "course"));
     }
+
+
+
+    public function solved(Request $request){
+        
+        $question_id = $request["question_id"];
+
+        auth()->user()->solved_questions()->toggle($question_id);
+
+        dd($question_id);
+        
+    }
 }

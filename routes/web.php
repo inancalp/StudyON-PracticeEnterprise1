@@ -46,3 +46,4 @@ Route::get("/studygroup/{studygroup}/course/{course}/create", [QuestionControlle
 Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
 
 Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])->name("question.show");
+Route::post("/question-solved", [QuestionCOntroller::class, "solved"])->name("question.solved");

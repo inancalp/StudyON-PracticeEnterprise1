@@ -14,34 +14,35 @@
                 <div class="card-body">
                     <p>Description <b>{{$studygroup->description}}</b></p>
                 </div>
-
+                <hr>
                 @if (auth()->user()->member_of->contains("id", "$studygroup->id")) 
-
+                    
                     @if ($studygroup->user_id == auth()->user()->id)
                         <div class="card-body">
+                            <h5><b>Admin</b> -> {{auth()->user()->username}}</h5>
                             <a href="/studygroup/{{$studygroup->id}}/course/create">Add a Course</a>
                         </div>
-                    
+                    @else
+                        <div class="card-body">
+                            <h5><b>User</b> -> {{auth()->user()->username}}</h5>
+                            <p>No priviledge to add Course</p>
+                        </div>
                     @endif
-
-                    <div class="card-body">
-                        <a href="#">QuizON</a>
-                        <p>will be a dropdownlist that will show the courses!</p>
-                    </div>
                     
+                   
+                    <hr>
                     <div class="card-body">
+                        
                         <div class="dropdown mt-3">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="quizon-dropdown" data-bs-toggle="dropdown">
-                                QuizON
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="quizon-dropdown">
-                                @foreach($studygroup->courses as $course)
-                                    <li><a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/questions" class="dropdown-item">{{$course->title}}</a></li>
-                                @endforeach
-                            </ul>
+                            <B>QuizON</B><br>
+                            @foreach($studygroup->courses as $course)
+                                {{-- UNTIL A WAY TO PASS PARAMETERS IN route('question.show') HREF WILL STAY LIKE THIS --}}
+                                <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/questions" class="item">{{$course->title}}</a><br>
+                            @endforeach
+                            
                         </div>
                     </div>
-                   
+                   <hr>
 
 
 
@@ -56,11 +57,15 @@
                         <p><b>Add Question:</b></p>
 
                         @foreach($studygroup->courses as $course)
-                        <div> <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/create">{{$course->title}}</a></div>
+                            @if(!auth()->user()->questions->contains("course_id", $course->id))
+                                <div> <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/create">{{$course->title}}</a></div>
+                            @else
+                                <p style="background-color: rgb(0, 204, 255)">You are up to Schedule! <b>;-)</b></p>
+                            @endif
                         @endforeach
                         courses will go directly to quiz scenerio
                     </div>
-                    
+                    <hr>
                     <div class="card-body">
                         <a href="#">Spaced Repetition</a>
                         <p>there will be the questions that user pick during the quiz</p>

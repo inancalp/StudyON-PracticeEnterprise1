@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Studygroup;
+use App\Models\Question;
 
 class User extends Authenticatable
 {
@@ -57,11 +58,6 @@ class User extends Authenticatable
     }
 
 
-
-
-
-    
-
     public function questions(){
         return $this->hasMany(Question::class);
     }
@@ -73,6 +69,9 @@ class User extends Authenticatable
     }
 
    
+    public function solved_questions(){
+        return $this -> belongsToMany(Question::class);
+    }
    
 
     

@@ -8,19 +8,26 @@ use \App\Models\User;
 
 class StudyGroupController extends Controller
 {   
+
     public function index(){
         $studygroups = StudyGroup::all();
         return view("studygroup.index", compact("studygroups"));
     }
+
+
 
     public function welcome(){
         $studygroups = StudyGroup::all();
         return view("welcome", compact("studygroups"));
     }
 
+
+
     public function create(){
         return view("studygroup.create");
     }
+
+
 
     public function store(){
 
@@ -38,6 +45,8 @@ class StudyGroupController extends Controller
         return view("home");      
     }
 
+
+
     public function show(StudyGroup $studygroup){
         // dd($studygroup);
         return view("studygroup.show", compact("studygroup"));
@@ -45,6 +54,8 @@ class StudyGroupController extends Controller
     }
 
 
+
+    
     public function join(Request $request){
 
         $password = $request->password; //password input of user.
