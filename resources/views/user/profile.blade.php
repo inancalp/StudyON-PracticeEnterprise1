@@ -31,19 +31,22 @@
                 <div class="card-body">
                     <p><b>Description</b></p>
                     {{ Auth::user()->profile->description ?? "N/A"}}
-                    <form action="#" method='POST'>
-                        @csrf
-                        <label>Change Description</label><br>
-                        <textarea style="width:300px; height:50px; margin-top:2px;" name="description"></textarea>
-                    </form>
+                    
                     <hr>
                 </div>
+                {{-- STUCK HERE! --}}
                 <div class="card-body">
                     <p><b>Statistics</b></p>
-                    <li style="list-style-type: none; margin-top:10px;">
-                        <ul>SpacedREP Comleted = ""</ul>
-                        <ul>StudyGroup Rating = ""</ul>
-                    </li>
+                    @foreach(auth()->user()->member_of as $studygroup)
+                        <p>SG NAME: {{"$studygroup->name"}}</p>
+                        <p>SG ID: {{"$studygroup->id"}}</p>
+                        <hr>
+                        <b>Scores Model:</b> <p>{{auth()->user()->scores}}</p>
+                        <hr>
+                        {{-- FIRST IS NECESSARY --}}
+                        <p>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</p>
+                        <hr>
+                    @endforeach
                 </div>
             </div>
         </div>

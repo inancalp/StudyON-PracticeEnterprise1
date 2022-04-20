@@ -19,18 +19,61 @@
                                         @if($question->id != auth()->user()->solved_questions->contains("id", "$question->id"))
                                             @if($question->user_id != auth()->user()->id)
                                                 <div class="card">
-                                                    <p> question = {{$question->question}}</p>
+
+
+                                                    {{-- WHERE QUESTIONS ARE HAVING PLACE --}}
+                                                    {{-- Radio Buttons shoul have same name and different ids!! --}}
                                                     <input type="hidden" name="question_id" value="{{$question->id}}">
-                                                    <label for="course_id">question course_id = "{{$question->course_id}}"</label>
-                                                    <input type="checkbox" name="course_id">
+
+                                                    <div class="card"><p>
+                                                        <b><u>Question)</u></b> <br> {{$question->question}}</p>
+                                                    </div>
+                                                    
+                                                    <div class="card">
+                                                        <b>A)</b>
+                                                        <label for="answer_a">{{$question->answer_a}}</label>
+                                                        <input type="radio" name="answer" id="answer_a">
+                                                    </div>
+
+                                                    <div class="card">
+                                                        <b>B)</b>
+                                                        <label for="answer_b">{{$question->answer_b}}</label>
+                                                        <input type="radio" name="answer" id="answer_b">
+                                                    </div>
+
+                                                    <div class="card">
+                                                        <b>C)</b>
+                                                        <label for="answer_c">{{$question->answer_c}}</label>
+                                                        <input type="radio" name="answer" id="answer_c">
+                                                    </div>
+                                                    
+                                                    <div class="card">
+                                                        <b>D)</b>
+                                                        <label for="answer_d">{{$question->answer_d}}</label>
+                                                        <input type="radio" name="answer" id="answer_d">
+                                                    </div>
+                                                    <input type="submit" name="submit" value="submit">
+
+
                                                 </div>
+                                                <hr>
                                             @endif
                                         @endif    
                                     @endif
                                 @endforeach
                             @endforeach
-                            <input type="submit" name="submit" value="submit">
+                            
                         </form>
+
+
+
+
+
+
+
+
+
+
                     @else
                         <div class="card-body">
                             <form action="{{route('studygroup.join')}}" method="POST">

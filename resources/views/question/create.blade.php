@@ -21,6 +21,12 @@
                                 <input type="hidden"  name="course_id" value="{{$course->id}}">
                                 course->id = {{$course->id}}
                             </div>
+
+                            <div class="card">
+                                <input type="hidden"  name="studygroup_id" value="{{$studygroup->id}}">
+                                studygroup->id = {{$studygroup->id}}
+                            </div>
+                            
                             <div class="card">
                                 <label>Question</label>
                                 <textarea name="question" cols="30" rows="5"></textarea>

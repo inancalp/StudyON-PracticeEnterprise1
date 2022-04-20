@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\StudyGroup;
 use \App\Models\User;
-
+use \App\Models\Score;
 class StudyGroupController extends Controller
 {   
 
@@ -39,6 +39,12 @@ class StudyGroupController extends Controller
         // with this way i am able to fetch the user_id to the study group automatically
         auth()->user()->studygroups()->create($data);
         auth()->user()->member_of()->toggle(Studygroup::latest()->first()->id); //HERE I PUT THE USER DIRECTLY AS A MEMBER IN THE STUDY GROUP
+
+        $score = new Score;
+        $score->user_id = auth()->user()->id;
+        $score->studygroup_id = Studygroup::latest()->first()->id;
+        $score->save(); 
+
         //ADD NOTE
         // StudyGroup::create($data);
         // dd(request()->all());
@@ -55,7 +61,7 @@ class StudyGroupController extends Controller
 
 
 
-    
+
     public function join(Request $request){
 
         $password = $request->password; //password input of user.
@@ -64,6 +70,11 @@ class StudyGroupController extends Controller
         if($password == Studygroup::find($studygroup)->password){
 
             auth()->user()->member_of()->toggle($studygroup);
+            
+            $score = new Score;
+            $score->user_id = auth()->user()->id;
+            $score->studygroup_id = $studygroup;
+            $score->save(); 
 
             $studygroups = StudyGroup::all();
             return view("studygroup.index", compact("studygroups"));

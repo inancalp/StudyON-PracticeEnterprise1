@@ -18,8 +18,9 @@ class Studygroup extends Model
         'description',
     ];
 
+    // THIS ONE IS USED FOR THE SINGLE ADMIN PURPOSES YET IT MIGHT CHANGE WITH AN UPDATE
     public function user(){
-        return $this->belongsTo(User::class); //NO! manyTomany relationship
+        return $this->belongsTo(User::class);
     }
 
     function members(){

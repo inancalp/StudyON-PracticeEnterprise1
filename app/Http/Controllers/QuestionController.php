@@ -6,7 +6,7 @@ use App\Models\Course;
 use App\Models\Studygroup;
 use Illuminate\Http\Request;
 use App\Models\Question;
-use App\Models\User;
+use App\Models\Score;
 
 class QuestionController extends Controller
 {
@@ -19,6 +19,7 @@ class QuestionController extends Controller
 
     public function store(){
 
+        $studygroup = request()["studygroup_id"];
         $data = request()->validate([
             'course_id' => '',
             'question' => 'required',
@@ -29,7 +30,13 @@ class QuestionController extends Controller
             'correct_answer' => 'required',
         ]);
         
+        
         auth()->user()->questions()->create($data);
+
+        $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
+        $score += 1;
+        Score::where("studygroup_id", $studygroup)->update(["score" => $score]);
+
         dd($data);
 
     }
@@ -39,14 +46,17 @@ class QuestionController extends Controller
     }
 
 
-
+    
     public function solved(Request $request){
         
         $question_id = $request["question_id"];
+        $chosen_answer = $request->answer;
+        
+        dd($chosen_answer);
 
-        auth()->user()->solved_questions()->toggle($question_id);
+        // auth()->user()->solved_questions()->toggle($question_id);
 
-        dd($question_id);
+        // dd($question_id);
         
     }
 }

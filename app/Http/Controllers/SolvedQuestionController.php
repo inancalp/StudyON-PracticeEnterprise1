@@ -11,7 +11,7 @@ class SolvedQuestionController extends Controller
     public function store(Request $request){
         
         $question_id = $request["question_id"];
-        // question or question->id ???
+        
         auth()->user()->solvedquestions()->toggle($question_id);
 
         dd(User::find(auth()->user()->id)->solvedquestions());
