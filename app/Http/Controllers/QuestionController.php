@@ -35,7 +35,7 @@ class QuestionController extends Controller
         auth()->user()->solved_questions()->toggle(Question::latest()->first()->id);
       
         $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
-        $score += 1;
+        $score += 5;
         Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
         dd($data);
@@ -64,7 +64,7 @@ class QuestionController extends Controller
         if($chosen_answer == $correct_answer){
 
             $score = auth()->user()->scores->where("studygroup_id", $studygroup_id)->first()->score;
-            $score += 1;
+            $score += 5;
             Score::where("studygroup_id", $studygroup_id)->where("user_id", auth()->user()->id)->update(["score" => $score]);
             
         }

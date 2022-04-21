@@ -40,7 +40,7 @@
                 <div class="card-body">
                     <p><b>Study Groups</b></p>
                     <li style="list-style-type: none; margin-top:10px;">
-                        @foreach($user->studygroups as $studygroup)
+                        @foreach($user->member_of as $studygroup)
                             <ul><a href="#">{{$studygroup->name}}</a></ul>
                         @endforeach
 

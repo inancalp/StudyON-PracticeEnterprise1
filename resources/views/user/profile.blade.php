@@ -42,10 +42,6 @@
                         <p><b>SG NAME:</b> {{"$studygroup->name"}}</p>
                         <p><b>SG ID:</b> {{"$studygroup->id"}}</p>
                         <p><b>Score for "{{$studygroup->name}}" -> </b>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</p>
-                        
-                        {{-- FIRST IS NECESSARY --}}
-                        <b>auth()->user()->scores: </b> <p>{{auth()->user()->scores}}</p>
-                        <hr>
                     @endforeach
                 </div>
             </div>
