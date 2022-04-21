@@ -31,13 +31,21 @@ class StudyGroupController extends Controller
 
     public function store(){
 
+        // dd(request()->user_id);
+        // dd(request()->all());
+        // $data["user_id"] = request()->user_id;
+
         $data = request()->validate([
+            "user_id" => "",
             "name" => "required|min:3",
             "password" => "required|min:3",
             "description" => "",
         ]);
-        // with this way i am able to fetch the user_id to the study group automatically
-        auth()->user()->studygroups()->create($data);
+
+        // updated!, info  @Notability.PE.Changes
+        // auth()->user()->studygroups()->create($data);
+
+        Studygroup::create($data);
         auth()->user()->member_of()->toggle(Studygroup::latest()->first()->id); //HERE I PUT THE USER DIRECTLY AS A MEMBER IN THE STUDY GROUP
 
         $score = new Score;

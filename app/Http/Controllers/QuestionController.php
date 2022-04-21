@@ -22,7 +22,7 @@ class QuestionController extends Controller
         $studygroup = request()["studygroup_id"];
         $data = request()->validate([
             'course_id' => '',
-            'question' => 'required',
+            'asked_question' => 'required',
             'answer_a' => 'required',
             'answer_b' => 'required',
             'answer_c' => 'required',
@@ -32,10 +32,11 @@ class QuestionController extends Controller
         
         
         auth()->user()->questions()->create($data);
-
+        auth()->user()->solved_questions()->toggle(Question::latest()->first()->id);
+      
         $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
         $score += 1;
-        Score::where("studygroup_id", $studygroup)->update(["score" => $score]);
+        Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
         dd($data);
 
@@ -49,14 +50,26 @@ class QuestionController extends Controller
     
     public function solved(Request $request){
         
-        $question_id = $request["question_id"];
-        $chosen_answer = $request->answer;
-        
-        dd($chosen_answer);
-
-        // auth()->user()->solved_questions()->toggle($question_id);
+        $question_id = $request->question_id;
+        $chosen_answer = Question::where("id", $question_id)->get($request->answer)->first()[$request->answer]; 
+        $correct_answer = Question::find($question_id)->correct_answer;
+        $studygroup_id = $request->studygroup_id;
 
         // dd($question_id);
+        // dd($question_id);
+        // dd($request->answer);
+        // dd($chosen_answer);
+        // dd($correct_answer);
+        
+        if($chosen_answer == $correct_answer){
+
+            $score = auth()->user()->scores->where("studygroup_id", $studygroup_id)->first()->score;
+            $score += 1;
+            Score::where("studygroup_id", $studygroup_id)->where("user_id", auth()->user()->id)->update(["score" => $score]);
+            
+        }
+        auth()->user()->solved_questions()->toggle($question_id);
+        dd($request->all());
         
     }
 }

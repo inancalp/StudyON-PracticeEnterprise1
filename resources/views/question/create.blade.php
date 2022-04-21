@@ -29,7 +29,7 @@
                             
                             <div class="card">
                                 <label>Question</label>
-                                <textarea name="question" cols="30" rows="5"></textarea>
+                                <textarea name="asked_question" cols="30" rows="5"></textarea>
                             </div>
                             
                             <div class="card">

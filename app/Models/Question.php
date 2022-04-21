@@ -13,7 +13,7 @@ class Question extends Model
     protected $table = "questions";
     protected $fillable = [
         "course_id",
-        "question",
+        "asked_question",
         "answer_a",
         "answer_b",
         "answer_c",
@@ -27,7 +27,7 @@ class Question extends Model
     }
     
     public function solved_by(){
-        $this -> belongsToMany(User::class);
+        return $this -> belongsToMany(User::class);
     }
 
 }

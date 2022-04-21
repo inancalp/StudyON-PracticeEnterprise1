@@ -47,6 +47,12 @@ class User extends Authenticatable
     ];
 
 
+    public function profile(){
+        return $this -> hasOne(Profile::class);
+    }
+
+
+
 
     // THIS ONE IS FOR THE SINGLE ADMIN PURPOSES YET IT MIGHT CHANGE WITH AN UPDATE
     public function studygroups(){
@@ -62,17 +68,14 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
-
-
-    public function profile(){
-        return $this -> hasOne(Profile::class);
-    }
-
 //    isn't it supposed to be hasMany(Question::class); ?
     public function solved_questions(){
         return $this -> belongsToMany(Question::class);
     }
    
+
+
+
     public function scores(){
         return $this->hasMany(Score::class);
     }

@@ -15,6 +15,9 @@
                     <form action="/studygroup" method="POST"> 
                         @csrf
                         <div class="card">
+                            <input type="hidden" name="user_id", value="{{auth()->user()->id}}">
+                        </div>
+                        <div class="card">
                             <label>Name:</label>
                             <input type="text" name="name">
                         </div>

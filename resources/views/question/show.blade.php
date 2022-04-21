@@ -24,33 +24,34 @@
                                                     {{-- WHERE QUESTIONS ARE HAVING PLACE --}}
                                                     {{-- Radio Buttons shoul have same name and different ids!! --}}
                                                     <input type="hidden" name="question_id" value="{{$question->id}}">
+                                                    <input type="hidden" name="studygroup_id" value="{{$studygroup->id}}">
 
                                                     <div class="card"><p>
-                                                        <b><u>Question)</u></b> <br> {{$question->question}}</p>
+                                                        <b><u>Q)</u></b> <br> {{$question->asked_question}}</p>
                                                     </div>
                                                     
                                                     <div class="card">
                                                         <b>A)</b>
                                                         <label for="answer_a">{{$question->answer_a}}</label>
-                                                        <input type="radio" name="answer" id="answer_a">
+                                                        <input type="radio" name="answer" value="answer_a">
                                                     </div>
 
                                                     <div class="card">
                                                         <b>B)</b>
                                                         <label for="answer_b">{{$question->answer_b}}</label>
-                                                        <input type="radio" name="answer" id="answer_b">
+                                                        <input type="radio" name="answer" value="answer_b">
                                                     </div>
 
                                                     <div class="card">
                                                         <b>C)</b>
                                                         <label for="answer_c">{{$question->answer_c}}</label>
-                                                        <input type="radio" name="answer" id="answer_c">
+                                                        <input type="radio" name="answer" value="answer_c">
                                                     </div>
                                                     
                                                     <div class="card">
                                                         <b>D)</b>
                                                         <label for="answer_d">{{$question->answer_d}}</label>
-                                                        <input type="radio" name="answer" id="answer_d">
+                                                        <input type="radio" name="answer" value="answer_d">
                                                     </div>
                                                     <input type="submit" name="submit" value="submit">
 

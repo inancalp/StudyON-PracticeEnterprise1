@@ -10,7 +10,7 @@ class Studygroup extends Model
 {
     use HasFactory;
     // copied from user
-    protected $table = "study_groups";
+    protected $table = "studygroups";
     protected $fillable = [
         'user_id',
         'name',

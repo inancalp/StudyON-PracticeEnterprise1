@@ -38,13 +38,13 @@
                 <div class="card-body">
                     <p><b>Statistics</b></p>
                     @foreach(auth()->user()->member_of as $studygroup)
-                        <p>SG NAME: {{"$studygroup->name"}}</p>
-                        <p>SG ID: {{"$studygroup->id"}}</p>
                         <hr>
-                        <b>Scores Model:</b> <p>{{auth()->user()->scores}}</p>
-                        <hr>
+                        <p><b>SG NAME:</b> {{"$studygroup->name"}}</p>
+                        <p><b>SG ID:</b> {{"$studygroup->id"}}</p>
+                        <p><b>Score for "{{$studygroup->name}}" -> </b>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</p>
+                        
                         {{-- FIRST IS NECESSARY --}}
-                        <p>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</p>
+                        <b>auth()->user()->scores: </b> <p>{{auth()->user()->scores}}</p>
                         <hr>
                     @endforeach
                 </div>

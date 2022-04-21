@@ -42,7 +42,7 @@ Route::post("/studygroup/course", [CourseController::class, "store"])->name("cou
 
 
 
-Route::get("/studygroup/{studygroup}/course/{course}/create", [QuestionController::class, "create"])->name("question.create");
+Route::get("/studygroup/{studygroup}/course/{course}/question/create", [QuestionController::class, "create"])->name("question.create");
 Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
 
 Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])->name("question.show");
