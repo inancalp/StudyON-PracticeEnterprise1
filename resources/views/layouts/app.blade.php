@@ -67,10 +67,12 @@
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         RepeatON
                                     </a>
+
+                                    {{-- CAN GIVE SOME INFORMATION FOR HOW MANY QUESTIONS IN LISTS ?? --}}
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">      
-                                        <a href="{{route('spacedrep.easy')}}" class="dropdown-item">Easies</a>
-                                        <a href="{{route('spacedrep.medium')}}" class="dropdown-item">Mediums</a>
-                                        <a href="{{route('spacedrep.hard')}}" class="dropdown-item">Hards</a>
+                                        <a href="{{route('repeaton.easy')}}" class="dropdown-item">Easies</a>
+                                        <a href="{{route('repeaton.medium')}}" class="dropdown-item">Mediums</a>
+                                        <a href="{{route('repeaton.hard')}}" class="dropdown-item">Hards</a>
                                     </div>
                                 </li>
                             </ul>

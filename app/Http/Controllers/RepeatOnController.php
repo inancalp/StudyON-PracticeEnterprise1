@@ -5,24 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Repeaton;
 use Illuminate\Http\Request;
 
-class SpacedRepController extends Controller
+class RepeatOnController extends Controller
 {
     
     public function show_easy(){
 
-        return view("spacedrep.easy");
+        return view("repeaton.easy");
 
     }
 
     public function show_medium(){
 
-        return view("spacedrep.medium");
+        return view("repeaton.medium");
         
     }
 
     public function show_hard(){
 
-        return view("spacedrep.hard");
+        return view("repeaton.hard");
         
     }
 

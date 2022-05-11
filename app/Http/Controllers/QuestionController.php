@@ -30,16 +30,22 @@ class QuestionController extends Controller
             'correct_answer' => 'required',
         ]);
         
+        if (!Question::where("user_id", auth()->user()->id)->where("course_id", request()->course_id)->first()){
+
+            auth()->user()->questions()->create($data);
+            auth()->user()->solved_questions()->toggle(Question::latest()->first()->id);
         
-        auth()->user()->questions()->create($data);
-        auth()->user()->solved_questions()->toggle(Question::latest()->first()->id);
-      
-        $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
-        $score += 5;
-        Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
+            $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
+            $score += 5;
+            Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
-        dd($data);
+            dd($data);
 
+        }
+        else{
+            return "YOU ALREADY HAVE INPUT A QUESTION!";
+        }
+        
     }
 
     public function show(Studygroup $studygroup, Course $course){
@@ -57,7 +63,7 @@ class QuestionController extends Controller
 
         
         // STORING QUESTION FOR USER TO USE IN repeatON 
-        
+
         if($request->spacedrep){
             
             $repeaton = new Repeaton();
@@ -79,7 +85,9 @@ class QuestionController extends Controller
         }
         auth()->user()->solved_questions()->toggle($question_id);
 
-        // dd($request->all());
+        dd($request->all());
         
     }
+
+
 }

@@ -10,7 +10,7 @@ class Repeaton extends Model
 {
     use HasFactory;
     
-    protected $table = "spacedrepetitions";
+    protected $table = "repeatons";
     protected $fillable = [
         "question",
         "correct_answer",

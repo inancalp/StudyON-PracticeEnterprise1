@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('spacedrepetitions', function (Blueprint $table) {
+        Schema::create('repeatons', function (Blueprint $table) {
 
             $table->id();
             $table->unsignedBigInteger("user_id");
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('spacedrepetitions');
+        Schema::dropIfExists('repeatons');
     }
 };

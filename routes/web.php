@@ -6,7 +6,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\SpacedRepController;
+use App\Http\Controllers\RepeatOnController;
 use Illuminate\Support\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -53,13 +53,13 @@ Route::post("/question-solved", [QuestionCOntroller::class, "solved"])->name("qu
 
 
 
-Route::get("/repeat-on/easy", [SpacedRepController::class, "show_easy"])->name("spacedrep.easy");
-Route::get("/repeat-on/medium", [SpacedRepController::class, "show_medium"])->name("spacedrep.medium");
-Route::get("/repeat-on/hard", [SpacedRepController::class, "show_hard"])->name("spacedrep.hard");
+Route::get("/repeat-on/easy", [RepeatOnController::class, "show_easy"])->name("repeaton.easy");
+Route::get("/repeat-on/medium", [RepeatOnController::class, "show_medium"])->name("repeaton.medium");
+Route::get("/repeat-on/hard", [RepeatOnController::class, "show_hard"])->name("repeaton.hard");
 
-Route::get("/repeat-on/move-question-easy/{repeat_question}", [SpacedRepController::class, "move_easy"]);
-Route::get("/repeat-on/move-question-medium/{repeat_question}", [SpacedRepController::class, "move_medium"]);
-Route::get("/repeat-on/move-question-hard/{repeat_question}", [SpacedRepController::class, "move_hard"]);
+Route::get("/repeat-on/move-question-easy/{repeat_question}", [RepeatOnController::class, "move_easy"]);
+Route::get("/repeat-on/move-question-medium/{repeat_question}", [RepeatOnController::class, "move_medium"]);
+Route::get("/repeat-on/move-question-hard/{repeat_question}", [RepeatOnController::class, "move_hard"]);
 
 
 
