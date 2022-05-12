@@ -32,9 +32,11 @@ Route::get("/user/profile/{user}", [ProfileController::class, "show"])->name("pr
 
 Route::get("/studygroup/create", [StudyGroupController::class, "create"]);
 Route::post("/studygroup", [StudyGroupController::class, "store"])->name("studygroup.store");
-Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])->name("studygroup.show");
+Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])
+    ->middleware("checkIfAuth")
+    ->name("studygroup.show");
 Route::get("/studygroup", [StudyGroupController::class, "index"])->name("studygroup.index");
-Route::post("/studygroup/join-successfull", [StudyGroupController::class, "join"])->name("studygroup.join");
+Route::post("/studygroup/join-successful", [StudyGroupController::class, "join"])->name("studygroup.join");
 
 
 Route::get("/studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
@@ -46,8 +48,11 @@ Route::post("/studygroup/course", [CourseController::class, "store"])->name("cou
 Route::get("/studygroup/{studygroup}/course/{course}/question/create", [QuestionController::class, "create"])->name("question.create");
 Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
 
-Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])->name("question.show");
-Route::post("/question-solved", [QuestionCOntroller::class, "solved"])->name("question.solved");
+Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])
+    ->middleware("checkIfAuth") 
+    ->name("question.show");
+
+Route::post("/question-solved", [QuestionController::class, "solved"])->name("question.solved");
 
 
 

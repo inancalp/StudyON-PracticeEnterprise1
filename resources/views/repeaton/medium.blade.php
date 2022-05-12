@@ -32,6 +32,10 @@
     </div>
 </div>
 
+
+
+@endsection
+
 <script>
     
     function show_answer(variable){
@@ -42,5 +46,3 @@
     }
 
 </script>
-
-@endsection

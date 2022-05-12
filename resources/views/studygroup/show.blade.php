@@ -60,7 +60,7 @@
                             @if(!auth()->user()->questions->contains("course_id", $course->id))
                                 <div> <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/question/create">{{$course->title}}</a></div>
                             @else
-                                <p style="background-color: rgb(0, 204, 255)">You are up to Schedule! <b>;-)</b></p>
+                                <p style="background-color: lightblue; border-radius:25px; width:fit-content; padding:4px;"> <b>{{$course->title}}</b> -> You have added a question for this week.</p>
                             @endif
                         @endforeach
                         courses will go directly to quiz scenerio

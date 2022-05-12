@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Studygroup;
 use \App\Models\User;
 use \App\Models\Score;
+use Illuminate\Support\Facades\Hash;
+
 class StudyGroupController extends Controller
 {   
 
@@ -42,8 +44,11 @@ class StudyGroupController extends Controller
             "description" => "",
         ]);
 
-        // updated!, info  @Notability.PE.Changes
-        // auth()->user()->studygroups()->create($data);
+        $password = $data["password"];
+        $password = Hash::make($password);
+        $data["password"] = $password;
+        // $data["password"] = $password;
+        // dd($data);
 
         Studygroup::create($data);
         auth()->user()->member_of()->toggle(Studygroup::latest()->first()->id); //HERE I PUT THE USER DIRECTLY AS A MEMBER IN THE STUDY GROUP
@@ -53,9 +58,6 @@ class StudyGroupController extends Controller
         $score->studygroup_id = Studygroup::latest()->first()->id;
         $score->save(); 
 
-        //ADD NOTE
-        // StudyGroup::create($data);
-        // dd(request()->all());
         return view("home");      
     }
 
@@ -74,8 +76,14 @@ class StudyGroupController extends Controller
 
         $password = $request->password; //password input of user.
         $studygroup = $request->hidden;
+
+        $hashedPassword = Studygroup::find($studygroup)->password;
+        $hashCheck = Hash::check($password, $hashedPassword);
+
+        // dd($hashCheck);
+
         
-        if($password == Studygroup::find($studygroup)->password){
+        if($hashCheck){
 
             auth()->user()->member_of()->toggle($studygroup);
             
@@ -89,7 +97,7 @@ class StudyGroupController extends Controller
 
         }
         else{
-            return "WRONG PASSWORD!";
+            return redirect("/studygroup/$studygroup");
         }
         
         

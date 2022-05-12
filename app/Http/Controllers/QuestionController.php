@@ -13,7 +13,13 @@ class QuestionController extends Controller
     
     
     public function create(Studygroup $studygroup, Course $course){
+
+        if(auth()->user()->questions->where("course_id", $course->id)->first()){
+            return abort(404);
+        }
+
         return view("question.create", compact("studygroup", "course"));
+        // return abort(404);
     }
 
 
@@ -39,11 +45,12 @@ class QuestionController extends Controller
             $score += 5;
             Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
-            dd($data);
+            return redirect("/studygroup/{$studygroup}");
+            // dd($data);
 
         }
         else{
-            return "YOU ALREADY HAVE INPUT A QUESTION!";
+            return abort(404);
         }
         
     }
@@ -60,9 +67,8 @@ class QuestionController extends Controller
         $chosen_answer = Question::where("id", $question_id)->get($request->answer)->first()[$request->answer]; 
         $correct_answer = Question::find($question_id)->correct_answer;
         $studygroup_id = $request->studygroup_id;
-
-        
-        // STORING QUESTION FOR USER TO USE IN repeatON 
+        $course_id = $request->course_id;
+        // dd($request->all());
 
         if($request->spacedrep){
             
@@ -74,7 +80,7 @@ class QuestionController extends Controller
 
         }
 
-        // dd($request->all());
+       
       
         if($chosen_answer == $correct_answer){
 
@@ -85,7 +91,7 @@ class QuestionController extends Controller
         }
         auth()->user()->solved_questions()->toggle($question_id);
 
-        dd($request->all());
+        return redirect("/studygroup/{$studygroup_id}/course/{$course_id}/questions");
         
     }
 
