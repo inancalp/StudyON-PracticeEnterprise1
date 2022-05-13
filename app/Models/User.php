@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
 use App\Models\Studygroup;
 use App\Models\Question;
 use App\Models\Spacedrepetition;
+use App\Models\Studychat;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -84,6 +84,10 @@ class User extends Authenticatable
 
         return $this -> hasMany(Repeaton::class);
 
+    }
+
+    public function studychats(){
+        return $this->hasMany(Studychat::class);
     }
     
 }

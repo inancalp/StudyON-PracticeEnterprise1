@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
+use Illuminate\Notifications\Notifiable;
 
 class Studygroup extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     // copied from user
     protected $table = "studygroups";
     protected $fillable = [
@@ -29,5 +30,9 @@ class Studygroup extends Model
 
     public function courses(){
         return $this->hasMany(Course::class);
+    }
+
+    public function studychats(){
+        return $this->hasMany(Studychat::class);
     }
 }

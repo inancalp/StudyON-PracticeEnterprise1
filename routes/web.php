@@ -7,6 +7,7 @@ use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RepeatOnController;
+use App\Http\Controllers\StudyChatController;
 use Illuminate\Support\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +68,10 @@ Route::get("/repeat-on/move-question-medium/{repeat_question}", [RepeatOnControl
 Route::get("/repeat-on/move-question-hard/{repeat_question}", [RepeatOnController::class, "move_hard"]);
 
 
+Route::get("/studygroup/{studygroup}/study-chat", [StudyChatController::class, "show"]);
+Route::post("/studygroup/{studygroup}/study-chat/text-posted", [StudyChatController::class, "store"])->name("studychat.store");
 
+Route::post("/studygroup/{studygroup}/study-chat/delete-message", [StudyChatController::class, "delete"]);
 
 
 
@@ -78,4 +82,11 @@ Route::get("/time", function(){
     $current->setTimezone('Europe/Amsterdam');
     return $current->format('Y-m-d H:i:s');
 
+});
+
+Route::get("/test", function(){
+    $notifications = auth()->user()->unreadNotifications;
+    foreach($notifications as $notification){
+        dd($notification->data["studygroup"]["name"]);
+    }
 });

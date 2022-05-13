@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
             $diff = $current_int - $q_int;
 
             if($diff >= 7){
-                $q->delete();
+                $q->delete(); //WORKS JUST FINE !
                 Log::info("Question DELETED");
             }
             else{

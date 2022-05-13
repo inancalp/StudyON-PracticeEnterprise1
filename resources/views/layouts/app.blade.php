@@ -102,30 +102,53 @@
                                 </li>
                         @endif
                         @else
-                        <li class="nav-item">
-                            {{-- HOME ILE PROFILE ARASINDA PROBLEM YASADIM --}}
-                            <a class="nav-link" href="#">Notifications</a> 
+
+
+
+                                
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Notifications <span class="text-dark bg-gray-300 border border-dark rounded-circle p-1">{{count(auth()->user()->unreadNotifications)}}</span>
+                            </a>
+
+
+                            {{-- where data comes in --}}
+                            <div style="max-width:300px; word-wrap: break-word;" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                @foreach(auth()->user()->unreadNotifications as $notification)
+                                    @include('notifications.first')
+                                @endforeach
+                            </div>
+
                         </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('user.profile')}}">{{ __('Profile') }}</a> 
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->username }}
+
+
+
+                            {{-- PROFILE --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('user.profile')}}">{{ __('Profile') }}</a> 
+                        </li>
+
+
+
+
+                            {{-- LOGOUT FORM --}}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Auth::user()->username }}
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
                     </ul>
                 </div>

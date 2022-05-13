@@ -42,15 +42,8 @@
                             
                         </div>
                     </div>
+
                    <hr>
-
-
-
-
-
-
-
-
                     <div class="card-body">
                         {{-- NEED TO MAKE COURSE INDEX PAGE N' STUFF --}}
                         
@@ -58,31 +51,45 @@
 
                         @foreach($studygroup->courses as $course)
                             @if(!auth()->user()->questions->contains("course_id", $course->id))
-                                <div> <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/question/create">{{$course->title}}</a></div>
+                                <div> 
+                                    <p>
+                                      <span style="background-color: lightblue; border-radius:25px; width:fit-content; padding:4px;"> Good2Add :</span>  
+                                        <a href="/studygroup/{{$studygroup->id}}/course/{{$course->id}}/question/create">{{$course->title}}</a>
+                                    </p>
+                                    
+                                </div>
                             @else
                                 <p style="background-color: lightblue; border-radius:25px; width:fit-content; padding:4px;"> <b>{{$course->title}}</b> -> You have added a question for this week.</p>
                             @endif
                         @endforeach
                         courses will go directly to quiz scenerio
                     </div>
+                    
                     <hr>
-
                     <div class="card-body">
-                        <a href="#">StudyCHAT</a>
+                        <a href="/studygroup/{{$studygroup->id}}/study-chat">StudyCHAT</a>
                         <p>regular chat room</p>
                     </div>
-
+                    <hr>
                     <div class="card-body">
                         <a href="#">Question Bank</a>
                         <p>regular chat room</p>
                     </div>
-
+                    <hr>
                     <div class="card-body">
                         <p><b>Group Members:</b></p>
+                        <hr>
                         @foreach($studygroup->members as $member)
-                        <div> <a href="/user/profile/{{$member->id}}">{{$member->name}}</a></div>
+                            <div>
+                                <p> 
+                                    <a href="/user/profile/{{$member->id}}">{{$member->name}}</a> 
+                                    with score ->
+                                    {{$member->scores->where("studygroup_id", $studygroup->id)->first()->score}}
+                                </p>
+                                <hr>
+                            </div>
                         @endforeach
-                        <p>group members will be actually a scoreboard with user profile link and it's score on the studygroup!</p>
+                       
                     </div>
                 @else
                     <div class="card-body">
