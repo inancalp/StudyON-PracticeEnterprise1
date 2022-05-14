@@ -72,8 +72,7 @@
                     </div>
                     <hr>
                     <div class="card-body">
-                        <a href="#">Question Bank</a>
-                        <p>regular chat room</p>
+                        <a href="/studygroup/{{$studygroup->id}}/question-bank">Question Bank</a>
                     </div>
                     <hr>
                     <div class="card-body">

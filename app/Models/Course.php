@@ -10,13 +10,15 @@ class Course extends Model
 {
 
     protected $table = "courses";
-    protected $fillable = ["title",];
+    protected $fillable = [
+        "title",
+    ];
     
     use HasFactory;
 
-    // public function questions(){
-    //     return $this->hasMany(Question::class);
-    // }
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
 
     public function studygroup(){
         return $this->belongsTo(Studygroup::class);

@@ -8,19 +8,21 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 
-class StudychatNotification extends Notification
+class QuizonNotification extends Notification
 {
     use Queueable;
 
     
     protected $studygroup;
-    protected $message; 
+    protected $question;
+    protected $course;
     protected $user;
     
-    public function __construct($studygroup, $message, $user)
+    public function __construct($studygroup, $question, $course, $user)
     {
         $this->studygroup = $studygroup;
-        $this->message = $message;
+        $this->question = $question;
+        $this->course = $course;
         $this->user = $user;
     }
 
@@ -31,10 +33,10 @@ class StudychatNotification extends Notification
 
     public function toDatabase($notifiable)
     {   
-    
         $data = [
-            'message' => $this->message,
+            'question' => $this->question,
             'studygroup' => $this->studygroup,
+            'course' => $this->course,
             'user' => $this->user,
             'date' => Carbon::now(),
         ];

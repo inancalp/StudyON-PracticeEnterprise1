@@ -28,10 +28,12 @@ class StudyChatController extends Controller
         ]);
 
         $message["studygroup_id"] = $studygroup->id;
-        
+        $user = auth()->user();
+        // dd($user);
         // notifications
+        // dd($message);
         $studygroupMembers = $studygroup->members->whereNotIn("id", auth()->user()->id);
-        $studygroupMembers->each->notify(new StudychatNotification($studygroup, $message));
+        $studygroupMembers->each->notify(new StudychatNotification($studygroup, $message, $user));
         
         auth()->user()->studychats()->create($message);
         return redirect("/studygroup/{$studygroup->id}/study-chat");

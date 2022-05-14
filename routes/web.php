@@ -64,9 +64,6 @@ Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionContro
 Route::post("/question-solved", [QuestionController::class, "solved"])->name("question.solved");
 
 
-
-
-
 Route::get("/repeat-on/easy", [RepeatOnController::class, "show_easy"])->name("repeaton.easy");
 Route::get("/repeat-on/medium", [RepeatOnController::class, "show_medium"])->name("repeaton.medium");
 Route::get("/repeat-on/hard", [RepeatOnController::class, "show_hard"])->name("repeaton.hard");
@@ -82,47 +79,57 @@ Route::post("/studygroup/{studygroup}/study-chat/text-posted", [StudyChatControl
 Route::post("/studygroup/{studygroup}/study-chat/delete-message", [StudyChatController::class, "delete"]);
 
 
-
 Route::get("/studygroup/{studygroup}/question-bank", [QuestionBankController::class, "show"])->name("questionbank.show");
 
 
 // AJAX
-Route::get("/markAsRead", function(){
-    auth()->user()->unreadNotifications->markAsRead();
-});
-
-// ---CARBON---
-Route::get("/time", function(){
-
-    $current = Carbon::now();
-    $current->setTimezone('Europe/Amsterdam');
-    return $current->format('Y-m-d H:i:s');
-
+Route::get("/markAsRead/{notificationId}", function($notificationId){
+    auth()->user()->unreadNotifications->where("id", "$notificationId")->markAsRead();
 });
 
 
-// playAround
+
+
+
 Route::get("/play", function(){
-
-    $now = Carbon::now();
-    
-    $questions = Question::get();
-
-    foreach($questions as $question){
-        $then = new Carbon($question->created_at);
-        $difference = ($then->diff($now)->days);
-        // print_r($question->studygroup_id);
-        $bank_question = new Questionbank();
-
-        $bank_question->studygroup_id = $question->studygroup_id;
-        $bank_question->question = $question->asked_question;
-        $bank_question->correct_answer = $question->correct_answer;
-        $bank_question->push();
-        // $bank_question->studygroup_id = 
-        
-        // if($difference > 7){
-            
-        // }
-    }
-
+    return auth()->user()->unreadNotifications->where("id", "9bfdcd00-cb09-4e4f-aec8-5e6248625a0e");
 });
+
+Route::get("/play/{param}", function($param){
+    return $param;
+});
+
+
+
+    // CARBON
+// Route::get("/time", function(){
+//     $current = Carbon::now();
+//     $current->setTimezone('Europe/Amsterdam');
+//     return $current->format('Y-m-d H:i:s');
+
+// });
+
+    // playAround
+// Route::get("/play", function(){
+
+//     $now = Carbon::now();
+    
+//     $questions = Question::get();
+
+//     foreach($questions as $question){
+//         $then = new Carbon($question->created_at);
+//         $difference = ($then->diff($now)->days);
+//         // print_r($question->studygroup_id);
+        
+//         $bank_question = new Questionbank();
+//         $bank_question->studygroup_id = $question->studygroup_id;
+//         $bank_question->question = $question->asked_question;
+//         $bank_question->correct_answer = $question->correct_answer;
+//         $bank_question->push();
+//     }
+
+// });
+
+// Route::get("/play", function(){
+//     return auth()->user()->unreadNotifications->type;
+// });

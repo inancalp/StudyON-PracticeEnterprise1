@@ -112,10 +112,13 @@
                             </a>
 
 
-                            {{-- where data comes in --}}
                             <div style="max-width:300px; word-wrap: break-word;" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 @forelse(auth()->user()->unreadNotifications as $notification)
-                                    @include('notifications.first')
+                                    @if($notification->type == "App\Notifications\QuizonNotification")
+                                        @include('notifications.quizon')
+                                    @elseif($notification->type == "App\Notifications\StudychatNotification")
+                                        @include('notifications.studychat')
+                                    @endif
                                 @empty
                                 <a class="dropdown-item" 
                                 href='#'
@@ -165,11 +168,16 @@
     </div>
 
     <script>
-        function markNotificationAsRead(){
+        // notificationId
+        function markNotificationAsRead(notificationId){
             var myRequest = new XMLHttpRequest();
-            myRequest.open("GET", "/markAsRead");
+            myRequest.open("GET", `/markAsRead/${notificationId}`);
+            // console.log(notificationId);
+            // console.log(notificationId);
             myRequest.send();
         }
     </script>
 </body>
 </html>
+
+

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
 use App\Models\Question;
+use App\Models\Questionbank;
 use Illuminate\Notifications\Notifiable;
 
 class Studygroup extends Model
@@ -42,7 +43,7 @@ class Studygroup extends Model
     }
 
     public function bank_questions(){
-        return $this->hasMany(Repeaton::class);
+        return $this->hasMany(Questionbank::class);
     }
-    
+
 }

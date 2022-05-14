@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Score;
 use App\Models\Repeaton;
+use App\Notifications\QuizonNotification;
 class QuestionController extends Controller
 {
     
@@ -23,9 +24,11 @@ class QuestionController extends Controller
         // return abort(404);
     }
 
-    // public function store(Studygroup $studygroup, Course $course)
+
+                // ALT-
+                // public function store(Studygroup $studygroup, Course $course)
     public function store(){
-        $studygroup = request()["studygroup_id"];
+        
         $data = request()->validate([
             'course_id' => '',
             'studygroup_id' => '',
@@ -37,16 +40,28 @@ class QuestionController extends Controller
             'correct_answer' => 'required',
         ]);
         
+        $studygroup_id = request()["studygroup_id"];
+        $course_id = request()["course_id"];
+        $studygroup = Studygroup::find($studygroup_id);
+        $course = Course::find($course_id);
+        $question = request()["asked_question"];
+        $user = auth()->user();
+        // notifications
+
+        // dd($question);
+        $studygroupMembers = $studygroup->members->whereNotIn("id", auth()->user()->id);
+        $studygroupMembers->each->notify(new QuizonNotification($studygroup, $question, $course, $user));
+        
         if (!Question::where("user_id", auth()->user()->id)->where("course_id", request()->course_id)->first()){
 
             auth()->user()->questions()->create($data);
             auth()->user()->solved_questions()->toggle(Question::latest()->first()->id);
         
-            $score = auth()->user()->scores->where("studygroup_id", $studygroup)->first()->score;
+            $score = auth()->user()->scores->where("studygroup_id", $studygroup_id)->first()->score;
             $score += 5;
-            Score::where("studygroup_id", $studygroup)->where("user_id", auth()->user()->id)->update(["score" => $score]);
+            Score::where("studygroup_id", $studygroup_id)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
-            return redirect("/studygroup/{$studygroup}");
+            return redirect("/studygroup/{$studygroup_id}");
             // dd($data);
 
         }
