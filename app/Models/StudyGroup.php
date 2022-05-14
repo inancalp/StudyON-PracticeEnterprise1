@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Course;
+use App\Models\Question;
 use Illuminate\Notifications\Notifiable;
 
 class Studygroup extends Model
@@ -35,4 +36,13 @@ class Studygroup extends Model
     public function studychats(){
         return $this->hasMany(Studychat::class);
     }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
+
+    public function bank_questions(){
+        return $this->hasMany(Repeaton::class);
+    }
+    
 }

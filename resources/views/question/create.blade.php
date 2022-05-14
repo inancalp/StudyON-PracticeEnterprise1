@@ -14,12 +14,19 @@
                     {{-- NEED MIDDLEWARE TO STOP ANY OTHER USER TO BE ABLE TO INPUT QUESTION --}}
                     {{-- FORM ACTION SHOULD ALSO ASSIGN 'user_id' 'is_admin' --}}
                     @if(auth()->user()->member_of->contains("id", "$studygroup->id"))
+
+
+                            {{-- ALT --}}
+                            {{-- "/studygroup/{{$studygroup->id}}/course/{{$course->id}}/question/create/created" --}}
                         <form action="{{route("question.store")}}" method="POST"> 
                             @csrf
                             
                             <div class="card">
                                 <input type="hidden"  name="course_id" value="{{$course->id}}">
+                                <input type="hidden"  name="studygroup_id" value="{{$studygroup->id}}">
                                 course->id = {{$course->id}}
+                                <br>
+                                studygroup->id = {{$course->id}}
                             </div>
 
                             <div class="card">

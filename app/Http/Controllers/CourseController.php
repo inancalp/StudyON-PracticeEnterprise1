@@ -26,10 +26,9 @@ class CourseController extends Controller
             'title' => 'required|min:5',
         ]);
         
-
         Studygroup::find($studygroup)->courses()->create($data);
 
-        dd($data);
+        return redirect("/studygroup/$studygroup");
         
     }
 

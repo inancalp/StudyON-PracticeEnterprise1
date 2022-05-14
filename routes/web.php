@@ -5,10 +5,15 @@ use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RepeatOnController;
 use App\Http\Controllers\StudyChatController;
+use App\Http\Controllers\QuestionBankController;
 use Illuminate\Support\Carbon;
+use App\Models\Question;
+use App\Models\Questionbank;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,7 +52,10 @@ Route::post("/studygroup/course", [CourseController::class, "store"])->name("cou
 
 
 Route::get("/studygroup/{studygroup}/course/{course}/question/create", [QuestionController::class, "create"])->name("question.create");
+            // ALT--
+            // "/studygroup/{studygroup}/course/{course}/question/create/created"
 Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
+
 
 Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])
     ->middleware("checkIfAuth") 
@@ -75,6 +83,14 @@ Route::post("/studygroup/{studygroup}/study-chat/delete-message", [StudyChatCont
 
 
 
+Route::get("/studygroup/{studygroup}/question-bank", [QuestionBankController::class, "show"])->name("questionbank.show");
+
+
+// AJAX
+Route::get("/markAsRead", function(){
+    auth()->user()->unreadNotifications->markAsRead();
+});
+
 // ---CARBON---
 Route::get("/time", function(){
 
@@ -84,9 +100,29 @@ Route::get("/time", function(){
 
 });
 
-Route::get("/test", function(){
-    $notifications = auth()->user()->unreadNotifications;
-    foreach($notifications as $notification){
-        dd($notification->data["studygroup"]["name"]);
+
+// playAround
+Route::get("/play", function(){
+
+    $now = Carbon::now();
+    
+    $questions = Question::get();
+
+    foreach($questions as $question){
+        $then = new Carbon($question->created_at);
+        $difference = ($then->diff($now)->days);
+        // print_r($question->studygroup_id);
+        $bank_question = new Questionbank();
+
+        $bank_question->studygroup_id = $question->studygroup_id;
+        $bank_question->question = $question->asked_question;
+        $bank_question->correct_answer = $question->correct_answer;
+        $bank_question->push();
+        // $bank_question->studygroup_id = 
+        
+        // if($difference > 7){
+            
+        // }
     }
+
 });

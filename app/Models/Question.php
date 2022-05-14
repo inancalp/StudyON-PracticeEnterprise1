@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-
+use App\Models\Studygroup;
 class Question extends Model
 {
     use HasFactory;
@@ -13,6 +13,7 @@ class Question extends Model
     protected $table = "questions";
     protected $fillable = [
         "course_id",
+        "studygroup_id",
         "asked_question",
         "answer_a",
         "answer_b",
@@ -28,6 +29,10 @@ class Question extends Model
     
     public function solved_by(){
         return $this -> belongsToMany(User::class);
+    }
+
+    public function studygroup(){
+        return $this->belongsTo(Studygroup::class);
     }
 
 }

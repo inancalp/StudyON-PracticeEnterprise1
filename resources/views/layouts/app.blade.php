@@ -105,18 +105,22 @@
 
 
 
-                                
+                                {{--  onclick="markNotificationAsRead()" li class="nav-item" dropdown --}}
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" href="#" class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <a id="notifications" href="#" class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" v-pre>
                                 Notifications <span class="text-dark bg-gray-300 border border-dark rounded-circle p-1">{{count(auth()->user()->unreadNotifications)}}</span>
                             </a>
 
 
                             {{-- where data comes in --}}
                             <div style="max-width:300px; word-wrap: break-word;" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                @foreach(auth()->user()->unreadNotifications as $notification)
+                                @forelse(auth()->user()->unreadNotifications as $notification)
                                     @include('notifications.first')
-                                @endforeach
+                                @empty
+                                <a class="dropdown-item" 
+                                href='#'
+                                style=" border:1px solid black; margin:2px; white-space: initial; ">No Notification</a>
+                                @endforelse
                             </div>
 
                         </li>
@@ -159,5 +163,13 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        function markNotificationAsRead(){
+            var myRequest = new XMLHttpRequest();
+            myRequest.open("GET", "/markAsRead");
+            myRequest.send();
+        }
+    </script>
 </body>
 </html>

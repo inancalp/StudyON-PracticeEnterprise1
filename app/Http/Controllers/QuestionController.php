@@ -14,6 +14,7 @@ class QuestionController extends Controller
     
     public function create(Studygroup $studygroup, Course $course){
 
+        // dd($studygroup);
         if(auth()->user()->questions->where("course_id", $course->id)->first()){
             return abort(404);
         }
@@ -22,12 +23,12 @@ class QuestionController extends Controller
         // return abort(404);
     }
 
-
+    // public function store(Studygroup $studygroup, Course $course)
     public function store(){
-
         $studygroup = request()["studygroup_id"];
         $data = request()->validate([
             'course_id' => '',
+            'studygroup_id' => '',
             'asked_question' => 'required',
             'answer_a' => 'required',
             'answer_b' => 'required',

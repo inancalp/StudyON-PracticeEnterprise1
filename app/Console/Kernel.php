@@ -7,6 +7,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Carbon;
+use App\Models\Questionbank;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -17,25 +19,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-       
         $schedule->call(function(){
-            $current = Carbon::now()->format("d");
-            $q = Question::find(1);
-            $q_date = $q->created_at->format("d");
-            $current_int = intval($current);
-            $q_int = intval($q_date);
-            $diff = $current_int - $q_int;
-
-            if($diff >= 7){
-                $q->delete(); //WORKS JUST FINE !
-                Log::info("Question DELETED");
-            }
-            else{
-                Log::info("Question on HOLD");
+            $now = Carbon::now();
+            $questions =  Question::get();
+            foreach($questions as $question){
+                $then = new Carbon($question->created_at);
+                $difference = ($then->diff($now)->days);
+                if($difference >= 7){
+                    $bank_question = new Questionbank();
+                    $bank_question->studygroup_id = $question->studygroup_id;
+                    $bank_question->question = $question->asked_question;
+                    $bank_question->correct_answer = $question->correct_answer;
+                    $bank_question->push();
+                    $question->delete();
+                }
             }
         })->everyMinute();
-
-       
     }
 
     /**
@@ -50,3 +49,20 @@ class Kernel extends ConsoleKernel
         require base_path('routes/console.php');
     }
 }
+
+
+
+// $current = Carbon::now()->format("d");
+// $q = Question::find(1);
+// $q_date = $q->created_at->format("d");
+// $current_int = intval($current);
+// $q_int = intval($q_date);
+// $diff = $current_int - $q_int;
+
+// if($diff >= 7){
+//     $q->delete(); //WORKS JUST FINE !
+//     Log::info("Question DELETED");
+// }
+// else{
+//     Log::info("Question on HOLD");
+// }
