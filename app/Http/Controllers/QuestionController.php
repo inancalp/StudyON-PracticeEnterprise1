@@ -9,24 +9,24 @@ use App\Models\Question;
 use App\Models\Score;
 use App\Models\Repeaton;
 use App\Notifications\QuizonNotification;
+
+
 class QuestionController extends Controller
 {
     
+    public function show(Studygroup $studygroup, Course $course){
+        return view("question.show", compact("studygroup", "course"));
+    }
     
     public function create(Studygroup $studygroup, Course $course){
 
-        // dd($studygroup);
         if(auth()->user()->questions->where("course_id", $course->id)->first()){
             return abort(404);
         }
-
         return view("question.create", compact("studygroup", "course"));
-        // return abort(404);
+
     }
 
-
-                // ALT-
-                // public function store(Studygroup $studygroup, Course $course)
     public function store(){
         
         $data = request()->validate([
@@ -46,9 +46,6 @@ class QuestionController extends Controller
         $course = Course::find($course_id);
         $question = request()["asked_question"];
         $user = auth()->user();
-        // notifications
-
-        // dd($question);
         $studygroupMembers = $studygroup->members->whereNotIn("id", auth()->user()->id);
         $studygroupMembers->each->notify(new QuizonNotification($studygroup, $question, $course, $user));
         
@@ -62,20 +59,12 @@ class QuestionController extends Controller
             Score::where("studygroup_id", $studygroup_id)->where("user_id", auth()->user()->id)->update(["score" => $score]);
 
             return redirect("/studygroup/{$studygroup_id}");
-            // dd($data);
-
         }
         else{
             return abort(404);
         }
         
     }
-
-    public function show(Studygroup $studygroup, Course $course){
-        return view("question.show", compact("studygroup", "course"));
-    }
-
-
     
     public function solved(Request $request){
         
@@ -84,31 +73,22 @@ class QuestionController extends Controller
         $correct_answer = Question::find($question_id)->correct_answer;
         $studygroup_id = $request->studygroup_id;
         $course_id = $request->course_id;
-        // dd($request->all());
 
         if($request->spacedrep){
-            
             $repeaton = new Repeaton();
             $repeaton->user_id = auth()->user()->id;
             $repeaton->question = $request->question;
             $repeaton->correct_answer = $correct_answer;
             $repeaton->save();
-
         }
-
-       
-      
         if($chosen_answer == $correct_answer){
-
             $score = auth()->user()->scores->where("studygroup_id", $studygroup_id)->first()->score;
             $score += 5;
             Score::where("studygroup_id", $studygroup_id)->where("user_id", auth()->user()->id)->update(["score" => $score]);
-            
         }
-        auth()->user()->solved_questions()->toggle($question_id);
 
+        auth()->user()->solved_questions()->toggle($question_id);
         return redirect("/studygroup/{$studygroup_id}/course/{$course_id}/questions");
-        
     }
 
 

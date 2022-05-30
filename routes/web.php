@@ -3,36 +3,18 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudyGroupController;
 use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\StudyGroupJoinController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\RepeatOnController;
 use App\Http\Controllers\StudyChatController;
 use App\Http\Controllers\QuestionBankController;
-use Illuminate\Support\Carbon;
-use App\Models\Question;
-use App\Models\Questionbank;
+use App\Http\Controllers\HomeController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', [StudyGroupController::class, "welcome"]);
 
 Auth::routes();
+Route::get('/', [StudyGroupController::class, "welcome"]);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// TRY NOT TO TOUCH THE HOME ROUTE
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
- 
 Route::get("/user/profile", [ProfileController::class, "profile_user"])->name("user.profile");
 Route::get("/user/profile/{user}", [ProfileController::class, "show"])->name("profile.show");
 
@@ -44,25 +26,17 @@ Route::get("/studygroup/{studygroup}", [StudyGroupController::class, "show"])
 Route::get("/studygroup", [StudyGroupController::class, "index"])->name("studygroup.index");
 Route::post("/studygroup/join-successful", [StudyGroupController::class, "join"])->name("studygroup.join");
 
-
 Route::get("/studygroup/{studygroup}/course/create", [CourseController::class, "create"])->name("course.create");
 Route::post("/studygroup/course", [CourseController::class, "store"])->name("course.store"); //dd
 
-
-
-
 Route::get("/studygroup/{studygroup}/course/{course}/question/create", [QuestionController::class, "create"])->name("question.create");
-            // ALT--
-            // "/studygroup/{studygroup}/course/{course}/question/create/created"
 Route::post("/studygroup/course/question", [QuestionController::class, "store"])->name("question.store"); //dd
-
 
 Route::get("/studygroup/{studygroup}/course/{course}/questions", [QuestionController::class, "show"])
     ->middleware("checkIfAuth") 
     ->name("question.show");
 
 Route::post("/question-solved", [QuestionController::class, "solved"])->name("question.solved");
-
 
 Route::get("/repeat-on/easy", [RepeatOnController::class, "show_easy"])->name("repeaton.easy");
 Route::get("/repeat-on/medium", [RepeatOnController::class, "show_medium"])->name("repeaton.medium");
@@ -78,9 +52,7 @@ Route::post("/studygroup/{studygroup}/study-chat/text-posted", [StudyChatControl
 
 Route::post("/studygroup/{studygroup}/study-chat/delete-message", [StudyChatController::class, "delete"]);
 
-
 Route::get("/studygroup/{studygroup}/question-bank", [QuestionBankController::class, "show"])->name("questionbank.show");
-
 
 // AJAX
 Route::get("/markAsRead/{notificationId}", function($notificationId){
@@ -91,13 +63,28 @@ Route::get("/markAsRead/{notificationId}", function($notificationId){
 
 
 
-Route::get("/play", function(){
-    return auth()->user()->unreadNotifications->where("id", "9bfdcd00-cb09-4e4f-aec8-5e6248625a0e");
-});
 
-Route::get("/play/{param}", function($param){
-    return $param;
-});
+
+
+
+
+
+
+
+
+
+// Route::get("/repeatPlay", function(){
+//     return RepeatOnController::class
+// });
+
+
+// Route::get("/play", function(){
+//     return auth()->user()->unreadNotifications->where("id", "9bfdcd00-cb09-4e4f-aec8-5e6248625a0e");
+// });
+
+// Route::get("/play/{param}", function($param){
+//     return $param;
+// });
 
 
 

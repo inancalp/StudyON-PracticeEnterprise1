@@ -12,12 +12,6 @@ use \App\Models\User; // DO NOT EVER FORGET :)
 class ProfileController extends Controller
 {
 
-    // //  function show(StudyGroup $studygroup){
-    //     // dd($studygroup);
-    //     return view("studygroup.show", compact("studygroup"));
-    //     // return view("studygroup.show", compact("name", "description"));
-    // }
-
     public function show(User $user){
         // dd($user);
         return view("profile.show", compact("user"));
@@ -28,12 +22,4 @@ class ProfileController extends Controller
         
         return view("user.profile");
     }
-
-    // public function profile_own($user){
-    //     $user = 
-    // }
-//     public function change_description(){
-        
-//         $description = auth()->
-//     }
 }

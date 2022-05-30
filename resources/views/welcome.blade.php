@@ -20,7 +20,7 @@
                 <div class="card-header"><b>Study Groups</b></div>
                 @foreach($studygroups as $studygroup)
                     <div class="card-body">
-                        <a class="card-link" href="/studygroup/{{$studygroup->id}}">{{$studygroup->name}}</a>
+                        <a id="studygroupLinks" class="card-link link-dark" href="/studygroup/{{$studygroup->id}}">{{$studygroup->name}}</a>
                     </div>
                 @endforeach  
             </div>   
@@ -28,3 +28,22 @@
     </div>
 </div>
 @endsection
+
+<style>
+
+#studygroupLinks{
+    text-decoration: none;
+    background-color:lightblue;
+    border-radius:25px;
+    padding:4px;
+    transition: all 0.3s ease 0s;
+}
+
+#studygroupLinks:hover{
+    color: blue;
+}
+a{  
+    transition: all 0.3s ease 0s;
+}
+
+</style>

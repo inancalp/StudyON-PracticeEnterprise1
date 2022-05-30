@@ -11,14 +11,11 @@ use App\Models\Questionbank;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
+
     protected function schedule(Schedule $schedule)
     {
+
+
         $schedule->call(function(){
             $now = Carbon::now();
             $questions =  Question::get();
@@ -37,11 +34,6 @@ class Kernel extends ConsoleKernel
         })->everyMinute();
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

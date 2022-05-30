@@ -6,7 +6,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><b>Profile with Auth::user() Command</b></div>
+                <div class="card-header"><h5><b><u>myProfile</u></b></h5></div>
 
                 <div class="card-body">
                     <p><b>Profile Picture</b></p>
@@ -14,34 +14,34 @@
                     <hr>
                 </div>
                 <div class="card-body">
-                    <p><b>userName</b></p>
+                    <h5><b><u>Username</u></b></h5>
                     {{ Auth::user()->username }}
                     <hr>
                 </div>
                 <div class="card-body">
-                    <p><b>nameSirname</b></p>
+                    <h5><b><u>Name</u></b></h5>
                     {{ Auth::user()->name }}
                     <hr>
                 </div>
                 <div class="card-body">
-                    <p><b>eMail</b></p>
+                    <h5><b><u>E-mail</u></b></h5>
                     {{ Auth::user()->email }}
                     <hr>
                 </div>
                 <div class="card-body">
-                    <p><b>Description</b></p>
+                    <h5><b><u>Description</u></b></h5>
                     {{ Auth::user()->profile->description ?? "N/A"}}
                     
                     <hr>
                 </div>
                 {{-- STUCK HERE! --}}
                 <div class="card-body">
-                    <p><b>Statistics</b></p>
+                    <h5><b><u>Statistics</u></b></h5>
                     @foreach(auth()->user()->member_of as $studygroup)
-                        <hr>
-                        <p><b>SG NAME:</b> {{"$studygroup->name"}}</p>
-                        <p><b>SG ID:</b> {{"$studygroup->id"}}</p>
-                        <p><b>Score for "{{$studygroup->name}}" -> </b>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</p>
+                        <div class="card">
+                            <p><u>Study Group</u> -> <b>{{"$studygroup->name"}}</b></p>
+                            <p><u>Score</u> -> <b>{{auth()->user()->scores->where("studygroup_id", $studygroup->id)->first()->score}}</b></p>
+                        </div>
                     @endforeach
                 </div>
             </div>

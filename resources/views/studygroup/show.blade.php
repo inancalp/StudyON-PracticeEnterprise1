@@ -62,13 +62,11 @@
                                 <p style="background-color: lightblue; border-radius:25px; width:fit-content; padding:4px;"> <b>{{$course->title}}</b> -> You have added a question for this week.</p>
                             @endif
                         @endforeach
-                        courses will go directly to quiz scenerio
                     </div>
                     
                     <hr>
                     <div class="card-body">
                         <a href="/studygroup/{{$studygroup->id}}/study-chat">StudyCHAT</a>
-                        <p>regular chat room</p>
                     </div>
                     <hr>
                     <div class="card-body">
@@ -76,16 +74,14 @@
                     </div>
                     <hr>
                     <div class="card-body">
-                        <p><b>Group Members:</b></p>
-                        <hr>
+                        <p><b>Score Board:</b></p>
                         @foreach($studygroup->members as $member)
-                            <div>
+                            <div class="card">
                                 <p> 
                                     <a href="/user/profile/{{$member->id}}">{{$member->name}}</a> 
                                     with score ->
                                     {{$member->scores->where("studygroup_id", $studygroup->id)->first()->score}}
                                 </p>
-                                <hr>
                             </div>
                         @endforeach
                        

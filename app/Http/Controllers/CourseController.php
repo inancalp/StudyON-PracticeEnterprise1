@@ -14,13 +14,7 @@ class CourseController extends Controller
 
 
     public function store(Request $request){
-
-            // dd(request()->all());
-
-        // !!!!VERY IMPORTANT
-            // IF there is a field does not need any validation, needs to be added in data as empty string; EX: "none" => ""
-            // Else it wont be pass throug \model\ ::create method!!!
-
+        
         $studygroup = $request->hidden;
         $data = request()->validate([
             'title' => 'required|min:5',

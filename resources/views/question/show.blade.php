@@ -8,7 +8,7 @@
         
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><b>Question list for studygroup: {{$studygroup->name}}, course_id: {{$course->id}}</b></h5></div>
+                <div class="card-header"><b>QuizON! - {{$studygroup->name}}, {{$course->title}}</b></h5></div>
                 <div class="card-body">
                     @if (auth()->user()->member_of->contains("id", "$studygroup->id"))
                         @php ($i = 0)
@@ -30,12 +30,12 @@
                                                         <input type="hidden" name="studygroup_id" value="{{$studygroup->id}}">
                                                         <input type="hidden" name="course_id" value="{{$course->id}}">
                                                         <div class="card">
-                                                            <h4>Question by:
+                                                            <b>Question by:
                                                                 <span style="background-color:lightblue; border-radius:25px; padding-right:4px; padding-left:4px;">
                                                                 {{App\Models\User::find($question->user_id)->name}}
                                                                 </span>
-                                                            </h4>
-                                                            <p>Question ID -> {{$question->id}}</p>
+                                                            </b>
+                                                            {{-- <p>Question ID -> {{$question->id}}</p> --}}
                                                         </div>
                                                         <div class="card"><p>
                                                             <input type="hidden" name="question" value="{{$question->asked_question}}">
@@ -76,7 +76,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <hr style="border:5px solid black; outline:5px solid black; margin-top:24px; margin-bottom:24px;">
+                                                {{-- <hr style="border:5px solid blue; outline:5px solid black; margin-top:24px; margin-bottom:24px;"> --}}
                                             @endif
                                         @endif    
                                     @endif
@@ -84,7 +84,7 @@
                             @endforeach
                                
                             @if ($i == 0)
-                                <p>i = {{$i}}</p> 
+                                {{-- <p>i = {{$i}}</p>  --}}
                                 <h5 style="background-color: lightblue; border-radius:25px; padding:4px; width:fit-content;">NO AVAILABLE QUESTION</h5>
                             @endif
                     @else

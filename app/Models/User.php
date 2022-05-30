@@ -16,11 +16,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
         'username',
@@ -28,34 +23,19 @@ class User extends Authenticatable
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
 
     public function profile(){
         return $this -> hasOne(Profile::class);
     }
 
-
-
-
-    // THIS ONE IS FOR THE SINGLE ADMIN PURPOSES YET IT MIGHT CHANGE WITH AN UPDATE
     public function studygroups(){
         return $this->hasMany(Studygroup::class);
     }
@@ -69,7 +49,6 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
-//    isn't it supposed to be hasMany(Question::class); ?
     public function solved_questions(){
         return $this -> belongsToMany(Question::class);
     }
@@ -81,13 +60,10 @@ class User extends Authenticatable
     
 
     public function repeat_questions(){
-
-        return $this -> hasMany(Repeaton::class);
-
+        return $this->hasMany(Repeaton::class);
     }
 
     public function studychats(){
         return $this->hasMany(Studychat::class);
     }
-    
 }

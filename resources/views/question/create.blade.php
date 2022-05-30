@@ -8,7 +8,7 @@
         
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><b>Add Question to <h5><b>{{$course->title}}</b></h5> with study group name: <h5><b>{{$studygroup->name}}</b></h5></div>
+                <div class="card-header"><b>Question for:<h5><b>{{$course->title}}</b></h5> Study Group: <h5><b>{{$studygroup->name}}</b></h5></div>
                 <div class="card-body">
                     
                     {{-- NEED MIDDLEWARE TO STOP ANY OTHER USER TO BE ABLE TO INPUT QUESTION --}}
@@ -20,19 +20,20 @@
                             {{-- "/studygroup/{{$studygroup->id}}/course/{{$course->id}}/question/create/created" --}}
                         <form action="{{route("question.store")}}" method="POST"> 
                             @csrf
-                            
-                            <div class="card">
+                            <input type="hidden"  name="studygroup_id" value="{{$studygroup->id}}">
+                            <input type="hidden"  name="course_id" value="{{$course->id}}">
+                            {{-- <div class="card">
                                 <input type="hidden"  name="course_id" value="{{$course->id}}">
                                 <input type="hidden"  name="studygroup_id" value="{{$studygroup->id}}">
                                 course->id = {{$course->id}}
                                 <br>
                                 studygroup->id = {{$course->id}}
-                            </div>
+                            </div> --}}
 
-                            <div class="card">
-                                <input type="hidden"  name="studygroup_id" value="{{$studygroup->id}}">
+                            {{-- <div class="card">
+                                
                                 studygroup->id = {{$studygroup->id}}
-                            </div>
+                            </div> --}}
                             
                             <div class="card">
                                 <label>Question</label>

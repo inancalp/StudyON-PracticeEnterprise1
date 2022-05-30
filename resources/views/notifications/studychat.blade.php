@@ -2,11 +2,13 @@
 <a onclick="markNotificationAsRead('{{$notification->id}}')"
   class="dropdown-item" 
     href="/studygroup/{{$notification->data['studygroup']['id']}}/study-chat" 
-      style=" border:1px solid black; margin:2px; white-space: initial;"> 
-
-  <b>User:</b>{{$notification->data["user"]["name"]}}
+      style="margin:2px; white-space: initial;"> 
+  <b style="background-color: lightblue; padding:2px; border-radius:5px; ">New Message!</b>
   <br>
-  <b>StudyGroup:</b>{{$notification->data["studygroup"]["name"]}}
+  <b>By -> </b>{{$notification->data["user"]["name"]}}
   <br>
-  <b>Message:</b> '{{$notification->data["message"]["text"]}}'
+  <b>StudyGroup -> </b>{{$notification->data["studygroup"]["name"]}}
+  <br>
+  <b>Message -> </b> '{{$notification->data["message"]["text"]}}'
+  <hr>
 </a>
