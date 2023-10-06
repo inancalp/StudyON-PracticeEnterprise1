@@ -1,7 +1,6 @@
 # StudyON for the Course: Practice Enterprise 1
 - Is an interactive web application for students to input questions they have think of during class or in their study sessions. With creating their study groups and the specified courses in it, they will challenge each other for to have as much as right answers possible from the questions they have created for each other. Main goal of the application is to encourage students to use “active recall” technique and be more prepared for the upcoming exams.
 - (!) I highly recommend you to check **"StudyON-FinalReport"** document of the project for detailed explanations of any aspect of the project.
-                                        ---------------------
 
 ## Course: Practice Enterprise 1
 - Empowers students to independently bring their ideas to life, from conception and planning to execution and presentation.
