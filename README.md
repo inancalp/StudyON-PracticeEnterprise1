@@ -40,4 +40,3 @@
             - php artisan migrate
             - php artisan key:generate
             - php artisan serve --port=<selected_port>
-Following these steps should successfully set up and run your Laravel project.
